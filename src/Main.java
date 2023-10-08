@@ -38,9 +38,7 @@ public class Main {
         //вывод всех ФИО сотрудников
         printAllFIO();
 
-
-        System.out.println(Arrays.toString(indexSalary(1.07f))); //увеличиваем зарплату на 7%
-
+        indexSalary(1.07f); //увеличиваем зарплату на 7%
 
         System.out.println("Минимальная зарплата сотрудника из 2 отдела: " + minimumSalaryDepartment(2));
 
@@ -50,8 +48,7 @@ public class Main {
 
         System.out.println("Средняя зарплата по 5 отделу: " + averageSalaryDepartment(5));
 
-        System.out.println("Индексирование зарплаты по 2 отделу:");
-        System.out.println(Arrays.toString(indexSalaryDepartment(2, 1.06f)));
+        indexSalaryDepartment(2, 1.06f); //увеличение зарплаты в отделе
 
         System.out.println("Сотрудники 3 отдела:");
         printEmployeesDepartment(3);
@@ -111,11 +108,10 @@ public class Main {
         }
     }
 
-    public static Employee[] indexSalary(float index) { //увеличение зарплаты на %
+    public static void indexSalary(float index) { //увеличение зарплаты на %
         for (int i = 0; i < employees.length; i++) {
             employees[i].setSalary(employees[i].getSalary() * index);
         }
-        return employees;
     }
 
     public static Employee minimumSalaryDepartment (int department) { //минимальная зарплата по отделу
@@ -165,14 +161,12 @@ public class Main {
         return average;
     }
 
-    public static Employee[] indexSalaryDepartment(int department, float index) { //увеличение зарплаты в отделе
-
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartment() == department) {
-                employees[i].setSalary(employees[i].getSalary() * index);
+    public static void indexSalaryDepartment(int department, float index) { //увеличение зарплаты в отделе
+        for (Employee employee : employees) {
+            if (employee.getDepartment() == department) {
+                employee.setSalary(employee.getSalary() * index);
             }
         }
-        return employees;
     }
 
     public static void printEmployeesDepartment(int department) { //вывод списка сотрудников отдела
