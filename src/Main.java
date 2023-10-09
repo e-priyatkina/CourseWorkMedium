@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
         i++;
         employees[i] = new Employee("Евдокимова Нонна Альбертовна", 4, 67000);
         i++;
-        employees[i] = new Employee("Титов Виссарион Глебович", 1, 63000);;
+        employees[i] = new Employee("Титов Виссарион Глебович", 1, 63000);
         i++;
         employees[i] = new Employee("Силина Иветта Даниловна", 3, 75000);
         i++;
@@ -109,8 +109,8 @@ public class Main {
     }
 
     public static void indexSalary(float index) { //увеличение зарплаты на %
-        for (int i = 0; i < employees.length; i++) {
-            employees[i].setSalary(employees[i].getSalary() * index);
+        for (Employee employee : employees) {
+            employee.setSalary(employee.getSalary() * index);
         }
     }
 
@@ -149,15 +149,18 @@ public class Main {
     }
 
     public static float averageSalaryDepartment(int department) { //средняя зарплата по отделу
-        float average = 0;
+        float average;
         int k = 0; //количество сотрудников
         for (Employee employee : employees) {
             if (employee.getDepartment() == department) {
-                average = countAllSalaryDepartment(department);
                 k++;
             }
         }
-        average = average / k;
+        if (k == 0) {
+            average = 0;
+        } else {
+            average = countAllSalaryDepartment(department) / k;
+        }
         return average;
     }
 
